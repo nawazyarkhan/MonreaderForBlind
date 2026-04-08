@@ -12,10 +12,11 @@
 ## ✨ At a Glance
 
 - **Problem:** Binary image classification for page-flip detection
-- **Approach:** Custom `TinyVGG` CNN with augmentation-based experimentation
-- **Best Verified Result:** **91.93% test accuracy** and **0.9196 F1 score**
+- **Approach:** Custom `TinyVGG` CNN with model comparison, custom-image inference, and sequence-level detection
+- **Best Verified Result:** **95.31% test accuracy** and **0.9530 macro F1** on the saved `model_1` run
+- **Sequence Signal:** Flip-folder testing shows **>86% flip ratio**, while a non-flip folder is reported at about **0.98%**
 - **Tools:** Python, PyTorch, Torchvision, scikit-learn, Matplotlib
-- **Portfolio Value:** Demonstrates end-to-end computer vision project ownership
+- **Portfolio Value:** Demonstrates end-to-end computer vision project ownership, from training to practical inference
 
 ---
 
@@ -31,6 +32,7 @@ MonReader is an end-to-end image classification project focused on a practical d
   - [📚 Table of Contents](#-table-of-contents)
   - [🎯 Business / Use-Case Relevance](#-business--use-case-relevance)
   - [🧰 Tech Stack](#-tech-stack)
+  - [🆕 Updated Notebook Highlights](#-updated-notebook-highlights)
   - [🔄 Step-by-Step Project Flow](#-step-by-step-project-flow)
     - [1. Data Acquisition](#1-data-acquisition)
     - [2. Data Exploration](#2-data-exploration)
@@ -39,8 +41,9 @@ MonReader is an end-to-end image classification project focused on a practical d
     - [5. Dataset \& DataLoader Creation](#5-dataset--dataloader-creation)
     - [6. Model Development](#6-model-development)
     - [7. Training \& Evaluation](#7-training--evaluation)
-    - [8. Inference on New Images](#8-inference-on-new-images)
-    - [9. Sequence-Level Extension](#9-sequence-level-extension)
+    - [8. Model Comparison](#8-model-comparison)
+    - [9. Custom Image Inference](#9-custom-image-inference)
+    - [10. Sequence-Level Page-Flip Detection](#10-sequence-level-page-flip-detection)
   - [🧠 Model Approach](#-model-approach)
   - [📈 Results](#-results)
   - [📁 Project Structure](#-project-structure)
@@ -82,6 +85,23 @@ The project shows how deep learning can be applied to a real classification prob
 
 ---
 
+## 🆕 Updated Notebook Highlights
+
+The latest notebook version now goes beyond basic model training and includes several practical additions:
+
+- **10-epoch training workflow** for `model_1` using `CrossEntropyLoss` and the Adam optimizer
+- **side-by-side comparison** of `model_0` and `model_1` across loss, accuracy, and **macro F1**
+- **custom image inference** on a downloaded sample image (`flipping_page.jpeg`)
+- **sequence-level prediction utilities**:
+  - `predict_flipping_sequence(...)`
+  - `predict_flipping_from_folder(...)`
+  - `show_sequence_predictions(...)`
+- **threshold-based decision logic** using both `min_flip_frames` and `min_flip_ratio`
+
+These updates make the notebook more portfolio-ready because they show not only model training, but also how the solution can be applied to realistic, ordered image sequences.
+
+---
+
 ## 🔄 Step-by-Step Project Flow
 
 ### 1. Data Acquisition
@@ -90,47 +110,51 @@ The notebook downloads the image dataset and organizes it into training and test
 - `notflip`
 
 ### 2. Data Exploration
-Initial exploration is performed to inspect:
+Initial exploration checks:
 - folder structure,
-- class labels,
-- image dimensions,
-- and representative samples from the dataset.
+- sample images,
+- class balance,
+- and image characteristics.
 
-This helps validate the quality and distribution of the input data before training.
+This helps validate the dataset before model training begins.
 
 ### 3. Image Preprocessing
-Images are prepared using `torchvision.transforms`, including:
+Images are transformed with `torchvision.transforms`, including:
 - resizing to `64x64`,
-- conversion to tensors,
-- and normalization-ready formatting for model input.
+- tensor conversion,
+- and consistent formatting for model input.
 
 ### 4. Data Augmentation
-To improve generalization, the project introduces **random horizontal flipping** during training. This creates more variability in the dataset and helps the model become more robust to visual differences.
+The updated workflow applies **random horizontal flipping** during training to improve generalization and reduce overfitting.
 
 ### 5. Dataset & DataLoader Creation
-The project uses `ImageFolder` and `DataLoader` to build an efficient training pipeline for batch-based model learning and evaluation.
+The project uses `ImageFolder` and `DataLoader` to create a scalable batching pipeline for both training and evaluation.
 
 ### 6. Model Development
-A custom **TinyVGG**-style CNN is implemented in PyTorch. The notebook compares two setups:
+A custom **TinyVGG**-style CNN is implemented in PyTorch and tested in two variants:
 - **Model 0:** TinyVGG without augmentation
 - **Model 1:** TinyVGG with data augmentation
 
-This allows for a clear experiment-driven comparison of training strategy and generalization performance.
-
 ### 7. Training & Evaluation
-The model training loop tracks:
-- training loss,
-- test loss,
-- accuracy,
-- and F1 score.
+The notebook trains the model for **10 epochs** using:
+- `CrossEntropyLoss`,
+- the Adam optimizer,
+- and evaluation metrics including **loss, accuracy, and macro F1 score**.
 
-This gives a more complete view of performance than accuracy alone.
+### 8. Model Comparison
+Results from `model_0` and `model_1` are compared visually through learning curves for:
+- train/test loss,
+- train/test accuracy,
+- and train/test F1.
 
-### 8. Inference on New Images
-After training, the model is used to predict whether a new frame represents a flipping or non-flipping page.
+### 9. Custom Image Inference
+The notebook downloads a standalone sample image, resizes it to `64x64`, runs it through `model_1`, and converts logits to prediction probabilities using `torch.softmax`.
 
-### 9. Sequence-Level Extension
-A strong practical addition in this project is the sequence inference logic that evaluates **ordered folders of frames** and estimates page-flipping behavior across an image sequence rather than only on isolated images.
+### 10. Sequence-Level Page-Flip Detection
+A major update in the notebook is the move from single-image prediction to **folder-based sequence analysis**. Ordered frames are evaluated using helper functions that:
+- score each frame,
+- compute a **flip ratio**,
+- and decide whether a sequence contains flipping based on `min_flip_frames` and `min_flip_ratio`.
 
 ---
 
@@ -147,15 +171,23 @@ Why this is meaningful:
 
 ## 📈 Results
 
-From the saved notebook run, the augmented model achieved strong performance:
+From the saved notebook outputs, the updated workflow achieved strong performance on the augmented `model_1` run:
 
-| Metric | Result |
+| Metric | Verified Result |
 |---|---:|
-| Test Accuracy | **0.9193** |
-| Test F1 Score | **0.9196** |
-| Epoch Reached | **4** |
+| Best Test Accuracy | **0.9531** |
+| Best Test Macro F1 | **0.9530** |
+| Best Performing Epoch | **8** |
+| Logged Training Time | **485.109 seconds** |
 
-These results indicate that the model learned to distinguish between `flip` and `notflip` effectively, while the augmentation strategy improved robustness.
+The notebook also demonstrates practical sequence behavior:
+
+| Sequence Test | Observed Outcome |
+|---|---:|
+| `testing/flip` folder | **flip ratio > 86%** |
+| `testing/notflip` folder | **flip ratio ≈ 0.98%** |
+
+These results show that the project does more than classify isolated frames — it also produces a clear sequence-level signal that can distinguish flipping from non-flipping behavior in ordered image sets.
 
 ---
 
@@ -216,4 +248,4 @@ From a portfolio perspective, this project demonstrates:
 - an experimentation mindset through **model comparison and augmentation**,
 - and the ability to translate technical work into a clear, outcome-focused solution.
 
-If you are reviewing this project as part of a candidate portfolio, MonReader is a strong example of applied ML work that combines **technical depth, structured experimentation, and business relevance**.
+- MonReader is a strong example of applied ML work that combines **technical depth, structured experimentation, and business relevance**.
