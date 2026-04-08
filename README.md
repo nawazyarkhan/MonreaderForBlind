@@ -25,16 +25,31 @@ MonReader is an end-to-end image classification project focused on a practical d
 
 ## 📚 Table of Contents
 
-- [Project Summary](#-project-summary)
-- [Business / Use-Case Relevance](#-business--use-case-relevance)
-- [Tech Stack](#-tech-stack)
-- [Step-by-Step Project Flow](#-step-by-step-project-flow)
-- [Model Approach](#-model-approach)
-- [Results](#-results)
-- [Project Structure](#-project-structure)
-- [How to Run](#️-how-to-run)
-- [What This Project Demonstrates](#-what-this-project-demonstrates)
-- [Concluding Note for Hiring Managers & Recruiters](#-concluding-note-for-hiring-managers--recruiters)
+- [MonReader — Page Flip Detection with Deep Learning](#monreader--page-flip-detection-with-deep-learning)
+  - [✨ At a Glance](#-at-a-glance)
+  - [📌 Project Summary](#-project-summary)
+  - [📚 Table of Contents](#-table-of-contents)
+  - [🎯 Business / Use-Case Relevance](#-business--use-case-relevance)
+  - [🧰 Tech Stack](#-tech-stack)
+  - [🔄 Step-by-Step Project Flow](#-step-by-step-project-flow)
+    - [1. Data Acquisition](#1-data-acquisition)
+    - [2. Data Exploration](#2-data-exploration)
+    - [3. Image Preprocessing](#3-image-preprocessing)
+    - [4. Data Augmentation](#4-data-augmentation)
+    - [5. Dataset \& DataLoader Creation](#5-dataset--dataloader-creation)
+    - [6. Model Development](#6-model-development)
+    - [7. Training \& Evaluation](#7-training--evaluation)
+    - [8. Inference on New Images](#8-inference-on-new-images)
+    - [9. Sequence-Level Extension](#9-sequence-level-extension)
+  - [🧠 Model Approach](#-model-approach)
+  - [📈 Results](#-results)
+  - [📁 Project Structure](#-project-structure)
+  - [▶️ How to Run](#️-how-to-run)
+    - [1. Install dependencies](#1-install-dependencies)
+    - [2. Open the notebook](#2-open-the-notebook)
+    - [3. Run the workflow](#3-run-the-workflow)
+  - [✅ What This Project Demonstrates](#-what-this-project-demonstrates)
+  - [💼 Concluding Note](#-concluding-note)
 
 This project demonstrates the ability to:
 - build a complete deep learning pipeline in Python,
@@ -152,7 +167,6 @@ MonReader/
 │   └── flip_notflip/
 ├── notebooks/
 │   └── MonReader_updated.ipynb
-├── oldcode/
 ├── requirements.txt
 └── README.md
 ```
@@ -192,7 +206,7 @@ This project highlights the ability to:
 
 ---
 
-## 💼 Concluding Note for Hiring Managers & Recruiters
+## 💼 Concluding Note 
 
 MonReader reflects **end-to-end ownership of a machine learning project** — from understanding the problem and preparing the data to designing the model, evaluating outcomes, and building usable inference logic.
 
