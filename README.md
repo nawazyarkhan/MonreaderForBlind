@@ -12,7 +12,7 @@
 ## ✨ At a Glance
 
 - **Problem:** Binary image classification for page-flip detection
-- **Approach:** Custom `TinyVGG` CNN with model comparison, custom-image inference, and sequence-level detection
+- **Approach:** Custom `TinyVGG` CNN with model comparison and sequence-level detection
 - **Best Verified Result:** **95.31% test accuracy** and **0.9530 macro F1** on the saved `model_1` run
 - **Sequence Signal:** Flip-folder testing shows **>86% flip ratio**, while a non-flip folder is reported at about **0.98%**
 - **Tools:** Python, PyTorch, Torchvision, scikit-learn, Matplotlib
@@ -22,56 +22,39 @@
 
 ## 📌 Project Summary
 
-MonReader is an end-to-end image classification project focused on a practical document-analysis problem: **identifying page-flip activity from visual input**. The workflow covers the full machine learning lifecycle — from data ingestion and preprocessing to model experimentation, evaluation, and inference.
+MonReader is a **PyTorch-based computer vision project** that classifies page images as `flip` or `notflip` and extends those predictions to **ordered frame sequences**. It demonstrates the full ML workflow: data preparation, CNN development, experiment comparison, metric-driven evaluation, and practical inference.
 
 ## 📚 Table of Contents
 
-- [MonReader — Page Flip Detection with Deep Learning](#monreader--page-flip-detection-with-deep-learning)
-  - [✨ At a Glance](#-at-a-glance)
-  - [📌 Project Summary](#-project-summary)
-  - [📚 Table of Contents](#-table-of-contents)
-  - [🎯 Business / Use-Case Relevance](#-business--use-case-relevance)
-  - [🧰 Tech Stack](#-tech-stack)
-  - [🆕 Updated Notebook Highlights](#-updated-notebook-highlights)
-  - [🔄 Step-by-Step Project Flow](#-step-by-step-project-flow)
-    - [1. Data Acquisition](#1-data-acquisition)
-    - [2. Data Exploration](#2-data-exploration)
-    - [3. Image Preprocessing](#3-image-preprocessing)
-    - [4. Data Augmentation](#4-data-augmentation)
-    - [5. Dataset \& DataLoader Creation](#5-dataset--dataloader-creation)
-    - [6. Model Development](#6-model-development)
-    - [7. Training \& Evaluation](#7-training--evaluation)
-    - [8. Model Comparison](#8-model-comparison)
-    - [9. Custom Image Inference](#9-custom-image-inference)
-    - [10. Sequence-Level Page-Flip Detection](#10-sequence-level-page-flip-detection)
-  - [🧠 Model Approach](#-model-approach)
-  - [📈 Results](#-results)
-  - [📁 Project Structure](#-project-structure)
-  - [▶️ How to Run](#️-how-to-run)
-    - [1. Install dependencies](#1-install-dependencies)
-    - [2. Open the notebook](#2-open-the-notebook)
-    - [3. Run the workflow](#3-run-the-workflow)
-  - [✅ What This Project Demonstrates](#-what-this-project-demonstrates)
-  - [💼 Concluding Note](#-concluding-note)
+- [✨ At a Glance](#-at-a-glance)
+- [📌 Project Summary](#-project-summary)
+- [🎯 Business / Use-Case Relevance](#-business--use-case-relevance)
+- [🧰 Tech Stack](#-tech-stack)
+- [🆕 Updated Notebook Highlights](#-updated-notebook-highlights)
+- [🔄 Step-by-Step Project Flow](#-step-by-step-project-flow)
+- [🧠 Model Approach](#-model-approach)
+- [📈 Results](#-results)
+- [📁 Project Structure](#-project-structure)
+- [▶️ How to Run](#️-how-to-run)
+- [✅ What This Project Demonstrates](#-what-this-project-demonstrates)
+- [💼 Concluding Note](#-concluding-note)
 
-This project demonstrates the ability to:
-- build a complete deep learning pipeline in Python,
-- work with image datasets using `torchvision`,
-- design and train a custom CNN architecture,
-- compare baseline vs augmented training strategies,
-- and extend a frame-level classifier into a **sequence-level page-flip detection workflow**.
+### Why this project stands out
+
+- **Custom modeling:** a hand-built `TinyVGG` CNN rather than a black-box workflow
+- **Clear experimentation:** baseline vs augmentation with tracked accuracy and macro F1
+- **Practical extension:** sequence-level flip detection beyond single-image classification
 
 ---
 
 ## 🎯 Business / Use-Case Relevance
 
-Detecting page-flip activity is useful in scenarios such as:
-- **digitization and document scanning** workflows,
-- **smart reading systems**,
-- **automated content capture** pipelines,
-- and **human activity understanding** from image sequences.
+Page-flip detection is useful in:
+- **document digitization** and scanning workflows,
+- **smart reading** or assistive systems,
+- and **automated content-capture** pipelines.
 
-The project shows how deep learning can be applied to a real classification problem where robust visual recognition is important.
+This makes the project a practical example of applying deep learning to a focused real-world vision task.
 
 ---
 
@@ -87,18 +70,15 @@ The project shows how deep learning can be applied to a real classification prob
 
 ## 🆕 Updated Notebook Highlights
 
-The latest notebook version now goes beyond basic model training and includes several practical additions:
+Key notebook capabilities:
 
-- **10-epoch training workflow** for `model_1` using `CrossEntropyLoss` and the Adam optimizer
-- **side-by-side comparison** of `model_0` and `model_1` across loss, accuracy, and **macro F1**
-- **custom image inference** on a downloaded sample image (`flipping_page.jpeg`)
-- **sequence-level prediction utilities**:
-  - `predict_flipping_sequence(...)`
-  - `predict_flipping_from_folder(...)`
-  - `show_sequence_predictions(...)`
-- **threshold-based decision logic** using both `min_flip_frames` and `min_flip_ratio`
+- **10-epoch training** for `model_1` with Adam and `CrossEntropyLoss`
+- **model comparison** across loss, accuracy, and **macro F1**
+- a dedicated final section for **page-flip detection**
+- **sequence utilities** such as `predict_flipping_sequence(...)` and `predict_flipping_from_folder(...)`
+- **threshold-based decision logic** using `min_flip_frames` and `min_flip_ratio`
 
-These updates make the notebook more portfolio-ready because they show not only model training, but also how the solution can be applied to realistic, ordered image sequences.
+Together, these updates show a project that moves beyond training into **usable inference logic**.
 
 ---
 
@@ -147,14 +127,8 @@ Results from `model_0` and `model_1` are compared visually through learning curv
 - train/test accuracy,
 - and train/test F1.
 
-### 9. Custom Image Inference
-The notebook downloads a standalone sample image, resizes it to `64x64`, runs it through `model_1`, and converts logits to prediction probabilities using `torch.softmax`.
-
-### 10. Sequence-Level Page-Flip Detection
-A major update in the notebook is the move from single-image prediction to **folder-based sequence analysis**. Ordered frames are evaluated using helper functions that:
-- score each frame,
-- compute a **flip ratio**,
-- and decide whether a sequence contains flipping based on `min_flip_frames` and `min_flip_ratio`.
+### 9. Detecting If a Page Is Flipping or Not
+The final workflow performs **folder-based sequence analysis**. Ordered frames are scored one by one, a **flip ratio** is computed, and the sequence is classified using `min_flip_frames` and `min_flip_ratio` thresholds.
 
 ---
 
@@ -240,12 +214,9 @@ This project highlights the ability to:
 
 ## 💼 Concluding Note 
 
-MonReader reflects **end-to-end ownership of a machine learning project** — from understanding the problem and preparing the data to designing the model, evaluating outcomes, and building usable inference logic.
+For hiring managers and recruiters, MonReader highlights:
+- hands-on experience with **PyTorch and computer vision**,
+- the ability to **design experiments and interpret metrics**,
+- and practical thinking by extending a notebook model into **usable detection logic**.
 
-From a portfolio perspective, this project demonstrates:
-- solid hands-on experience with **deep learning and computer vision**,
-- practical use of **PyTorch and data pipelines**,
-- an experimentation mindset through **model comparison and augmentation**,
-- and the ability to translate technical work into a clear, outcome-focused solution.
-
-- MonReader is a strong example of applied ML work that combines **technical depth, structured experimentation, and business relevance**.
+In short, this is a concise, portfolio-ready example of building and applying a deep learning solution **end to end**.
