@@ -1,3 +1,4 @@
+  **Apziva Project code** - **oGcFw3VgYQq3cvNC**
 # MonReader — Page Flip Detection with Deep Learning
 
 ![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)
@@ -26,18 +27,33 @@ MonReader is a **PyTorch-based computer vision project** that classifies page im
 
 ## 📚 Table of Contents
 
-- [✨ At a Glance](#-at-a-glance)
-- [📌 Project Summary](#-project-summary)
-- [🎯 Business / Use-Case Relevance](#-business--use-case-relevance)
-- [🧰 Tech Stack](#-tech-stack)
-- [🆕 Updated Notebook Highlights](#-updated-notebook-highlights)
-- [🔄 Step-by-Step Project Flow](#-step-by-step-project-flow)
-- [🧠 Model Approach](#-model-approach)
-- [📈 Results](#-results)
-- [📁 Project Structure](#-project-structure)
-- [▶️ How to Run](#️-how-to-run)
-- [✅ What This Project Demonstrates](#-what-this-project-demonstrates)
-- [💼 Concluding Note](#-concluding-note)
+- [MonReader — Page Flip Detection with Deep Learning](#monreader--page-flip-detection-with-deep-learning)
+  - [✨ At a Glance](#-at-a-glance)
+  - [📌 Project Summary](#-project-summary)
+  - [📚 Table of Contents](#-table-of-contents)
+    - [Why this project stands out](#why-this-project-stands-out)
+  - [🎯 Business / Use-Case Relevance](#-business--use-case-relevance)
+  - [🧰 Tech Stack](#-tech-stack)
+  - [🆕 Updated Notebook Highlights](#-updated-notebook-highlights)
+  - [🔄 Step-by-Step Project Flow](#-step-by-step-project-flow)
+    - [1. Data Acquisition](#1-data-acquisition)
+    - [2. Data Exploration](#2-data-exploration)
+    - [3. Image Preprocessing](#3-image-preprocessing)
+    - [4. Data Augmentation](#4-data-augmentation)
+    - [5. Dataset \& DataLoader Creation](#5-dataset--dataloader-creation)
+    - [6. Model Development](#6-model-development)
+    - [7. Training \& Evaluation](#7-training--evaluation)
+    - [8. Model Comparison](#8-model-comparison)
+    - [9. Detecting If a Page Is Flipping or Not](#9-detecting-if-a-page-is-flipping-or-not)
+  - [🧠 Model Approach](#-model-approach)
+  - [📈 Results](#-results)
+  - [📁 Project Structure](#-project-structure)
+  - [▶️ How to Run](#️-how-to-run)
+    - [1. Install dependencies](#1-install-dependencies)
+    - [2. Open the notebook](#2-open-the-notebook)
+    - [3. Run the workflow](#3-run-the-workflow)
+  - [✅ What This Project Demonstrates](#-what-this-project-demonstrates)
+  - [💼 Concluding Note](#-concluding-note)
 
 ### Why this project stands out
 
@@ -220,3 +236,4 @@ For hiring managers and recruiters, MonReader highlights:
 - and practical thinking by extending a notebook model into **usable detection logic**.
 
 In short, this is a concise, portfolio-ready example of building and applying a deep learning solution **end to end**.
+
