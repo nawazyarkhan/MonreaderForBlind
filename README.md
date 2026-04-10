@@ -14,7 +14,7 @@
 
 - **Problem:** Binary image classification for page-flip detection
 - **Approach:** Custom `TinyVGG` CNN with model comparison and sequence-level detection
-- **Best Verified Result:** **95.31% test accuracy** and **0.9530 macro F1** on the saved `model_1` run
+- **Best Verified Result:** **95.31% test accuracy** and **0.9530 macro F1** on the saved models(`model_0` & `model_1`) runs
 - **Sequence Signal:** Flip-folder testing shows **>86% flip ratio**, while a non-flip folder is reported at about **0.98%**
 - **Tools:** Python, PyTorch, Torchvision, scikit-learn, Matplotlib
 - **Portfolio Value:** Demonstrates end-to-end computer vision project ownership, from training to practical inference
