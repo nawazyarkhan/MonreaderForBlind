@@ -16,7 +16,7 @@
 - **Approach:** Custom `TinyVGG` CNN with model comparison and sequence-level detection
 - **Best Verified Result:** **99.84% test accuracy** and **0.9983 macro F1** on ResNet18 (Model 2)
 - **Five Models Tested:** TinyVGG baseline/augmented, ResNet18, MobileNet V2, EfficientNet B0
-- **Sequence Signal:** Flip-folder testing shows **>86% flip ratio**, while a non-flip folder is reported at about **0.98%**
+- **Sequence Signal:** Per-model sequence comparison shows strongest consistency for ResNet18/MobileNetV2/EfficientNetB0 (99%+ on flip and 100% on notflip-target evaluation)
 - **Tools:** Python, PyTorch, Torchvision, scikit-learn, Matplotlib
 - **Portfolio Value:** Demonstrates end-to-end deep learning expertise with transfer learning and training best practices
 
@@ -239,18 +239,21 @@ The updated workflow with five models and early stopping provides comprehensive 
    - Suggests need for larger model capacity to benefit from advanced regularization
 
 6. **Sequence Detection Capability:** All models successfully learned flip-vs-notflip patterns
-   - Flip folder: **>86% flip ratio** detected
-   - Non-flip folder: **~0.98% flip ratio** detected
-   - Clear sequence-level signal demonstrates practical effectiveness
+  - Flip-sequence ratios ranged from **79.66% to 99.66%** across models
+  - Notflip-target sequence ratios ranged from **86.32% to 100.00%** across models
+  - Transfer-learning models produced the most consistent sequence predictions
 
-The notebook also demonstrates practical sequence behavior:
+The notebook includes explicit per-model sequence comparison runs:
 
-| Sequence Test | Observed Outcome |
-|---|---:|
-| `testing/flip` folder | **flip ratio > 86%** |
-| `testing/notflip` folder | **flip ratio ≈ 0.98%** |
+| Model | `testing/flip` ratio | `testing/notflip` target ratio |
+|---|---:|---:|
+| TinyVGG_simple | 79.66% | 98.37% |
+| TinyVGG_augmented | 88.28% | 86.32% |
+| ResNet18 | 99.66% | 100.00% |
+| MobileNetV2 | 99.66% | 100.00% |
+| EfficientNetB0 | 99.31% | 100.00% |
 
-These results show that the project does more than classify isolated frames — it also produces a clear sequence-level signal that can distinguish flipping from non-flipping behavior in ordered image sets.
+These results show that the project does more than classify isolated frames; it also supports consistent sequence-level decisions across multiple architectures, with the transfer-learning models delivering the strongest performance.
 
 ---
 
